@@ -24,11 +24,9 @@ hs_err_pid*
 replay_pid*
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+**/.vscode/
 !*.code-workspace
 *.vsix   
+
+# Mise
+mise.toml
