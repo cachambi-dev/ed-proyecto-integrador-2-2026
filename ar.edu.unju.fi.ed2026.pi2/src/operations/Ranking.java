@@ -126,7 +126,8 @@ public class Ranking {
 
         @Override
         public String toString() {
-            return jugador + " - Puntaje: " + puntaje;
+            return System.lineSeparator() + jugador.getNombre() + " " + jugador.getApellido()
+                    + " (id " + jugador.getId() + ") - Puntaje: " + puntaje;
         }
     }
 
