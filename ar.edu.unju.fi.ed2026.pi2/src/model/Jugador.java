@@ -35,6 +35,10 @@ public class Jugador {
         return puntaje;
     }
 
+    public Naipe[] getManoActual() {
+        return manoActual;
+    }
+
     public SimpleLinkedList<Naipe> getNaipesGanados() {
         return naipesGanados;
     }
