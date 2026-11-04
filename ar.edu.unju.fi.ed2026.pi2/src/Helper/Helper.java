@@ -193,4 +193,34 @@ public class Helper {
         return nextDate(Helper.scanner, mensaje);
     }
 
+
+    // Método para validar enteros positivos
+    public static int leerEnteroPositivo(Scanner scanner, String mensaje)
+    {
+        int numero = 0;
+        boolean entradaValida = false;
+        
+        while ( !entradaValida )
+        {
+            System.out.print(mensaje);
+            try
+            {
+                numero = scanner.nextInt(); 
+                
+                if (numero > 0) {
+                    entradaValida = true;
+                } else {
+                    System.out.println("Error: El número debe ser mayor a cero.");
+                }
+                
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("Error: Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            }
+        }
+        return numero;
+    }
+
 }
