@@ -8,7 +8,7 @@ import structures.SimpleLinkedList;
 import structures.StackLinkedList;
 
 public class Ronda {
-    private int numero;
+    private int numeroPartida;
     private int numeroRonda;
     private Jugador[] participantes;
     private int[] puntajes;
@@ -16,7 +16,7 @@ public class Ronda {
     private StackLinkedList<Naipe> mazo;
 
     public Ronda(int numero, int numeroRonda, Jugador[] participantes, StackLinkedList<Naipe> mazo) {
-        this.numero = numero;
+        this.numeroPartida = numero;
         this.numeroRonda = numeroRonda;
         this.participantes = Objects.requireNonNull(participantes, "Los participantes no pueden ser null");
         this.mazo = Objects.requireNonNull(mazo, "El mazo no puede ser null");
@@ -25,11 +25,11 @@ public class Ronda {
     }
 
     public int getNumero() {
-        return numero;
+        return numeroPartida;
     }
 
     public void setNumero(int numero) {
-        this.numero = numero;
+        this.numeroPartida = numero;
     }
 
     public int getNumeroRonda() {
@@ -177,7 +177,7 @@ public class Ronda {
     }
 
     private void mostrarResultado() {
-        System.out.println("Ronda " + numeroRonda + " de la partida " + numero + ":");
+        System.out.println("Ronda " + numeroRonda + " de la partida " + numeroPartida + ":");
         for (int i = 0; i < participantes.length; i++) {
             System.out.println(participantes[i].getNombre() + " " + participantes[i].getApellido()
                     + " obtuvo " + puntajes[i] + " puntos.");
@@ -192,7 +192,7 @@ public class Ronda {
 
     @Override
     public String toString() {
-        return "Ronda [numero=" + numero + ", numeroRonda=" + numeroRonda + ", participantes="
+        return "Ronda [numeroPartida=" + numeroPartida + ", numeroRonda=" + numeroRonda + ", participantes="
                 + Arrays.toString(participantes) + ", ganadores=" + ganadores + "]";
     }
 }
