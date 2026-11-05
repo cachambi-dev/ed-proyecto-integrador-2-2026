@@ -30,6 +30,15 @@ public class Jugador {
         this.manoActual = new Queue<>(3);
         this.naipesGanados = new QueueLinkedList<>();
     }
+    
+    public Jugador(String nombre, String apellido) {
+        this.id = siguienteId++;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.puntaje = 0;
+        this.manoActual = new Queue<>(3);
+        this.naipesGanados = new QueueLinkedList<>();
+    }
 
     /**
      * Obtiene el identificador único del jugador.
