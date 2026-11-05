@@ -1,13 +1,12 @@
 package operations;
 
 import model.Jugador;
-
 import structures.SimpleLinkedList;
 import Helper.Helper;
 import java.util.Scanner;
 
 public class Inscripcion {
-    private SimpleLinkedList<Jugador> jugadoresDisponibles;
+    private SimpleLinkedList <Jugador> jugadoresDisponibles;
     private int contadorNumeroJugador;
 
     public Inscripcion() {
@@ -15,7 +14,7 @@ public class Inscripcion {
         this.contadorNumeroJugador = 1; // Generador correlativo de ID de jugador
     }
 
-    public SimpleLinkedList<Jugador> getJugadoresDisponibles() {
+    public SimpleLinkedList <Jugador> getJugadoresDisponibles() {
         return jugadoresDisponibles;
     }
 
@@ -32,30 +31,38 @@ public class Inscripcion {
             return;
         }
 
-        System.out.print("Ingrese Nombre: ");
-        String nombre = scanner.nextLine().trim();
+        String nombre = Helper.leerCadena(scanner,"Ingrese Nombre: ");
 
-        System.out.print("Ingrese Apellido: ");
-        String apellido = scanner.nextLine().trim();
+        String apellido = Helper.leerCadena(scanner,"Ingrese Apellido: ");
 
-       
         int edad = Helper.leerEnteroPositivo(scanner,"Ingrese Edad: ");
 
         // 2. Asignar ID único y crear el jugador (puntaje inicial en 0)
-        int numeroJugador = contadorNumeroJugador++;
-        Jugador nuevoJugador = new Jugador(nombre, apellido, dni, edad);
+        int id = contadorNumeroJugador++;
+        Jugador nuevoJugador = new Jugador( nombre, apellido, dni,edad);
 
         // 3. Guardar en la estructura de disponibles
-        jugadoresDisponibles.addFirst(nuevoJugador);
+        jugadoresDisponibles.addLast(nuevoJugador);
 
-        System.out.println(" ¡Jugador inscripto con éxito! Se le asignó el Número de Jugador:  " + numeroJugador);
+        System.out.println(" ¡Jugador inscripto con éxito! Se le asignó el Número de Jugador:  " + id);
     }
 
     /* Valida si un DNI ya existe en la lista de inscriptos*/
     public Jugador buscarPorDni(String dni) {
         for (int i = 0; i < jugadoresDisponibles.size(); i++) {
             Jugador j = (Jugador) jugadoresDisponibles.get(i);
-            if (j.getDni().equalsIgnoreCase(dni)) {
+            if (j != null && j.getDni() != null && j.getDni().equalsIgnoreCase(dni)) {
+                return j;
+            }
+        }
+        return null;
+    }
+
+    /* Busca un participante por su número único de jugador*/
+    public Jugador buscarPorNumeroJugador(int id) {
+        for (int i = 0; i < jugadoresDisponibles.size(); i++) {
+            Jugador j = jugadoresDisponibles.get(i);
+            if (j != null && j.getId() == id) {
                 return j;
             }
         }
