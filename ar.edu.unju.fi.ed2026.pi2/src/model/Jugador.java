@@ -6,6 +6,8 @@ import structures.QueueLinkedList;
 public class Jugador {
     private static int siguienteId = 1;
     private final int id;
+    private String dni;
+    private int edad;
     private String nombre;
     private String apellido;
     private int puntaje;
@@ -18,10 +20,12 @@ public class Jugador {
      * @param nombre   nombre del jugador
      * @param apellido apellido del jugador
      */
-    public Jugador(String nombre, String apellido) {
+    public Jugador(String nombre, String apellido, String dni, int edad) {
         this.id = siguienteId++;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
+        this.edad = edad;
         this.puntaje = 0;
         this.manoActual = new Queue<>(3);
         this.naipesGanados = new QueueLinkedList<>();
@@ -35,7 +39,26 @@ public class Jugador {
     public int getId() {
         return id;
     }
-
+    
+    /**
+     * Obtiene el DNI del jugador.
+     *
+     * @return dni del jugador
+     */
+    public String getDni() {
+    	return dni;
+    }
+    
+    
+    /**
+     * Obtiene la edad del jugador.
+     *
+     * @return edad del jugador
+     */
+    public int getEdad() {
+    	return edad;
+    }
+    
     /**
      * Obtiene el nombre del jugador.
      *
