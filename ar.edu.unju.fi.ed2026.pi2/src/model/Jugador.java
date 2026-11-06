@@ -27,7 +27,7 @@ public class Jugador {
         this.dni = dni;
         this.edad = edad;
         this.puntaje = 0;
-        this.manoActual = new Queue<>(3);
+        this.manoActual = new Queue<>(Ronda.CARTAS_POR_RONDA);
         this.naipesGanados = new QueueLinkedList<>();
     }
     
@@ -36,7 +36,7 @@ public class Jugador {
         this.nombre = nombre;
         this.apellido = apellido;
         this.puntaje = 0;
-        this.manoActual = new Queue<>(3);
+        this.manoActual = new Queue<>(Ronda.CARTAS_POR_RONDA);
         this.naipesGanados = new QueueLinkedList<>();
     }
 
@@ -166,7 +166,7 @@ public class Jugador {
      */
     public void recibirNaipe(Naipe naipe) {
 
-        if (manoActual.size() < 3) {
+        if (manoActual.size() < Ronda.CARTAS_POR_RONDA) {
             manoActual.add(naipe);
         }
     }

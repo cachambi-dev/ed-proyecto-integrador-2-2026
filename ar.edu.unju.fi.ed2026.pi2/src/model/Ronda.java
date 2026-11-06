@@ -8,6 +8,9 @@ import structures.SimpleLinkedList;
 import structures.StackLinkedList;
 
 public class Ronda {
+	
+	public static final int CARTAS_POR_RONDA = 3; 
+	
     private int numeroPartida;
     private int numeroRonda;
     private Jugador[] participantes;
@@ -97,14 +100,33 @@ public class Ronda {
         return tieneAs(j) ? puntaje * 2 : puntaje;
     }
 
-    public void jugar() {
+    public void jugarRonda() {
         repartirCartas();
         resolverGanador();
         conservarCartas();
         mostrarResultado();
     }
 
-    public void resolverGanador() {
+    private void repartirCartas() {
+        int cartasNecesarias = participantes.length * CARTAS_POR_RONDA;
+        if (mazo.size() < cartasNecesarias) {
+            throw new IllegalStateException("No hay cartas suficientes para repartir la ronda.");
+        }
+
+        for (Jugador jugador : participantes) {
+            jugador.setManoActual(new Queue<>(CARTAS_POR_RONDA));
+        }
+
+        for (Jugador jugador : participantes) {
+            for (int i = 0; i < CARTAS_POR_RONDA; i++) {
+                Naipe carta = mazo.pop();
+                carta.setDisponible(false);
+                jugador.recibirNaipe(carta);
+            }
+        }
+    }
+    
+    private void resolverGanador() {
         int cantComodin = 0;
         for (int i = 0; i < participantes.length; i++) {
             puntajes[i] = calcularPuntajeAs(participantes[i]);
@@ -139,25 +161,6 @@ public class Ronda {
             }
             if (puntajes[i] == maximo) {
                 ganadores.addLast(participantes[i]);
-            }
-        }
-    }
-
-    private void repartirCartas() {
-        int cartasNecesarias = participantes.length * 3;
-        if (mazo.size() < cartasNecesarias) {
-            throw new IllegalStateException("No hay cartas suficientes para repartir la ronda.");
-        }
-
-        for (Jugador jugador : participantes) {
-            jugador.setManoActual(new Queue<>(3));
-        }
-
-        for (Jugador jugador : participantes) {
-            for (int i = 0; i < 3; i++) {
-                Naipe carta = mazo.pop();
-                carta.setDisponible(false);
-                jugador.recibirNaipe(carta);
             }
         }
     }
