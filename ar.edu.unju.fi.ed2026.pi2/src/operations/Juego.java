@@ -17,7 +17,7 @@ public class Juego {
     private final SimpleLinkedList<Jugador> jugadoresDisponibles;
     private final Ranking ranking;
     private final Random random;
-    private int numeroPartida;
+    private static int numeroPartida; //static because the variable must be unitary, should >1 Games be instanced
     private boolean partidaEnCurso;
 
     public Juego(SimpleLinkedList<Jugador> jugadoresDisponibles, Ranking ranking) {
@@ -27,18 +27,37 @@ public class Juego {
         this.random = new Random();
     }
 
+//    public Partida iniciarPartida(Jugador[] seleccionados) {
+//        if (partidaEnCurso) {
+//            throw new IllegalStateException("Ya hay una partida en curso.");
+//        }
+//
+//        Jugador[] participantes = validarSeleccion(seleccionados);
+//        StackLinkedList<Naipe> mazo = crearMazoBarajado();
+//        Partida partida = new Partida(++numeroPartida, mazo, participantes);
+//
+//        partidaEnCurso = true;
+//        try {
+//            partida.partidaNueva();
+//            actualizarRanking(participantes);
+//        } finally {
+//            partidaEnCurso = false;
+//        }
+//
+//        return partida;
+//    }
+    
     public Partida iniciarPartida(Jugador[] seleccionados) {
         if (partidaEnCurso) {
             throw new IllegalStateException("Ya hay una partida en curso.");
         }
 
         Jugador[] participantes = validarSeleccion(seleccionados);
-        StackLinkedList<Naipe> mazo = crearMazoBarajado();
-        Partida partida = new Partida(++numeroPartida, mazo, participantes);
+        Partida partida = new Partida(++numeroPartida, participantes);
 
         partidaEnCurso = true;
         try {
-            partida.partidaNueva();
+            partida.jugar();
             actualizarRanking(participantes);
         } finally {
             partidaEnCurso = false;
