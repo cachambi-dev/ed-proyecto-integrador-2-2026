@@ -82,6 +82,17 @@ public class Helper {
         return nextInteger(scanner, mensaje, 0);
     }
 
+    public static String leerCadena(Scanner scanner, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            String palabra = scanner.nextLine();
+            if (!palabra.trim().isEmpty()) {
+                return palabra;
+            }
+            System.out.println("Error: No puedes ingresar una cadena vacía.");
+        }
+    }
+
     /**
      * Metodo que valida el ingreso de valores decimales.
      */

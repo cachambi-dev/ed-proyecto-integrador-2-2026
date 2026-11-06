@@ -46,6 +46,8 @@ public class Partida {
             System.out.println(jugador.getNombre() + " " + jugador.getApellido()
                     + " terminó la partida con " + jugador.getPuntaje() + " puntos.");
         }
+
+        mostrarGanadorPartida();
     }
 
     public int getNumeroPartida() {
@@ -54,6 +56,32 @@ public class Partida {
 
     public Jugador[] getJugadores() {
         return jugadores.clone();
+    }
+
+    private void mostrarGanadorPartida() {
+        int puntajeMaximo = jugadores[0].getPuntaje();
+        for (Jugador jugador : jugadores) {
+            if (jugador.getPuntaje() > puntajeMaximo) {
+                puntajeMaximo = jugador.getPuntaje();
+            }
+        }
+
+        int cantidadGanadores = 0;
+        StringBuilder nombresGanadores = new StringBuilder();
+        for (Jugador jugador : jugadores) {
+            if (jugador.getPuntaje() == puntajeMaximo) {
+                if (nombresGanadores.length() > 0) {
+                    nombresGanadores.append(", ");
+                }
+                nombresGanadores.append(jugador.getNombre()).append(" ").append(jugador.getApellido());
+                cantidadGanadores++;
+            }
+        }
+
+        String resultado = cantidadGanadores == 1
+                ? "Ganador de la partida " + numeroPartida + ": "
+                : "Empate en la partida " + numeroPartida + " entre: ";
+        System.out.println(resultado + nombresGanadores + " con " + puntajeMaximo + " puntos.");
     }
 
     private Jugador[] validarJugadores(Jugador[] participantes) {
