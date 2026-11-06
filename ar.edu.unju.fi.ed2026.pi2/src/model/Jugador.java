@@ -185,7 +185,7 @@ public class Jugador {
      * almacenadas.
      */
     public void vaciarNaipesGanados() {
-        if (!naipesGanados.isEmpty()) {
+        while (!naipesGanados.isEmpty()) {
             naipesGanados.remove();
         }
     }
@@ -195,7 +195,7 @@ public class Jugador {
      * cartas almacenadas.
      */
     public void vaciarManoActual() {
-        if (!manoActual.isEmpty()) {
+        while (!manoActual.isEmpty()) {
             manoActual.remove();
         }
     }

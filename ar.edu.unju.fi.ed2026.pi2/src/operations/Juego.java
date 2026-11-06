@@ -4,15 +4,12 @@ import java.util.Objects;
 import java.util.Random;
 
 import model.Jugador;
-import model.Naipe;
 import model.Partida;
 import structures.SimpleLinkedList;
-import structures.StackLinkedList;
 
 public class Juego {
 
     private static final int CANTIDAD_JUGADORES = 4;
-    private static final int CANTIDAD_CARTAS = 54;
 
     private final SimpleLinkedList<Jugador> jugadoresDisponibles;
     private final Ranking ranking;
@@ -134,33 +131,6 @@ public class Juego {
             }
         }
         return null;
-    }
-
-    private StackLinkedList<Naipe> crearMazoBarajado() {
-        String[] palos = { "trebol", "corazon", "diamante", "pica" };
-        Naipe[] cartas = new Naipe[CANTIDAD_CARTAS];
-        int indice = 0;
-
-        for (String palo : palos) {
-            for (int valor = 1; valor <= 13; valor++) {
-                cartas[indice++] = new Naipe(palo, valor);
-            }
-        }
-        cartas[indice++] = new Naipe("Comodin", 100);
-        cartas[indice] = new Naipe("Comodin", 100);
-
-        for (int i = cartas.length - 1; i > 0; i--) {
-            int indiceAleatorio = random.nextInt(i + 1);
-            Naipe temporal = cartas[i];
-            cartas[i] = cartas[indiceAleatorio];
-            cartas[indiceAleatorio] = temporal;
-        }
-
-        StackLinkedList<Naipe> mazo = new StackLinkedList<>();
-        for (Naipe carta : cartas) {
-            mazo.push(carta);
-        }
-        return mazo;
     }
 
     private void actualizarRanking(Jugador[] participantes) {

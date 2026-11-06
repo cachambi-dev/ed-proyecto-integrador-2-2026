@@ -6,7 +6,6 @@ import model.Jugador;
 import operations.Juego;
 import operations.Inscripcion;
 import operations.Ranking;
-import structures.SimpleLinkedList;
 
 public class App {
 
