@@ -121,8 +121,8 @@ public class Partida {
     private void mostrarGanadores() {
         System.out.print(ganadores.size() == 1 ? "Ganó la partida: " : "Empate entre: ");
         for (Jugador ganador : ganadores) {
-            System.out.print(ganador.getNombre() + " " + ganador.getApellido()
-                    + " (id " + ganador.getId() + ") ");
+            System.out.print(ganador.getNombre() + " " + ganador.getApellido() + " (id " 
+            		+ ganador.getId() + ") con un puntaje de " + ganador.getPuntaje());
         }
         System.out.println();
     }
