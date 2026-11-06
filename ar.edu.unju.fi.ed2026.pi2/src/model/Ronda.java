@@ -108,13 +108,13 @@ public class Ronda {
     }
 
     private void repartirCartas() {
-        int cartasNecesarias = participantes.length * 3;
+        int cartasNecesarias = participantes.length * CARTAS_POR_RONDA;
         if (mazo.size() < cartasNecesarias) {
             throw new IllegalStateException("No hay cartas suficientes para repartir la ronda.");
         }
 
         for (Jugador jugador : participantes) {
-            jugador.setManoActual(new Queue<>(3));
+            jugador.setManoActual(new Queue<>(CARTAS_POR_RONDA));
         }
 
         for (Jugador jugador : participantes) {

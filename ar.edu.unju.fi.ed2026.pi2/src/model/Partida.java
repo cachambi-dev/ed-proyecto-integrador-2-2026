@@ -18,7 +18,6 @@ public class Partida {
     private final StackLinkedList<Naipe> mazo;
     private final int numeroPartida;
     private final Jugador[] jugadores;
-    private final Random random;
     private SimpleLinkedList<Jugador> ganadores = new SimpleLinkedList<>();
     private boolean jugada;
     
@@ -28,10 +27,10 @@ public class Partida {
             throw new IllegalArgumentException("El número de partida debe ser positivo.");
         }
         this.numeroPartida = numeroPartida;
-        this.mazo = Objects.requireNonNull(mazo, "El mazo no puede ser null");
+        this.mazo = validarMazo(mazo);
         this.jugadores = validarJugadores(jugadores);
-        this.random = new Random();
     }
+    
     
     public Partida(int numeroPartida, Jugador[] jugadores) {
         if (numeroPartida < 1) {
@@ -39,32 +38,9 @@ public class Partida {
         }
         this.numeroPartida = numeroPartida;
         this.jugadores = validarJugadores(jugadores);
-        this.random = new Random();
         this.mazo = crearMazoMezclado();
     }
-
-//    public void partidaNueva() {
-//        if (mazo.size() < CANTIDAD_JUGADORES * Ronda.CARTAS_POR_RONDA * CANTIDAD_RONDAS) {
-//            throw new IllegalStateException("El mazo no tiene cartas suficientes para completar la partida.");
-//        }
-//
-//        for (Jugador jugador : jugadores) {
-//            jugador.setManoActual(new Queue<>(Ronda.CARTAS_POR_RONDA));
-//            jugador.setNaipesGanados(new QueueLinkedList<>());
-//        }
-//
-//        System.out.println("Iniciando partida N° " + numeroPartida);
-//        for (int numeroRonda = 1; numeroRonda <= CANTIDAD_RONDAS; numeroRonda++) {
-//            Ronda ronda = new Ronda(numeroPartida, numeroRonda, jugadores, mazo);
-//            ronda.jugar();
-//        }
-//
-//        for (Jugador jugador : jugadores) {
-//            jugador.calcularPuntaje();
-//            System.out.println(jugador.getNombre() + " " + jugador.getApellido()
-//                    + " terminó la partida con " + jugador.getPuntaje() + " puntos.");
-//        }
-//    }
+    
     
     public void jugar() {
     	if (jugada) {
@@ -79,6 +55,7 @@ public class Partida {
     	ganadores = determinarGanadores();
     	mostrarGanadores();
     }
+    
     
     private void prepararJugadores() {
         for (Jugador jugador : jugadores) {
@@ -107,8 +84,7 @@ public class Partida {
             if (jugador.getPuntaje() > maximo) {
                 maximo = jugador.getPuntaje();
             }
-        }
- 
+        } 
         SimpleLinkedList<Jugador> resultado = new SimpleLinkedList<>();
         for (Jugador jugador : jugadores) {
             if (jugador.getPuntaje() == maximo) {
@@ -118,6 +94,7 @@ public class Partida {
         return resultado;
     }
  
+    
     private void mostrarGanadores() {
         System.out.print(ganadores.size() == 1 ? "Ganó la partida: " : "Empate entre: ");
         for (Jugador ganador : ganadores) {
@@ -126,8 +103,10 @@ public class Partida {
         }
         System.out.println();
     }
+   
     
     private StackLinkedList<Naipe> crearMazoMezclado() {
+    	Random random = new Random();
         String[] palos = { "trebol", "corazon", "diamante", "pica" };
         Naipe[] cartas = new Naipe[CANTIDAD_CARTAS];
         int indice = 0;
@@ -146,7 +125,6 @@ public class Partida {
             cartas[i] = cartas[indiceAleatorio];
             cartas[indiceAleatorio] = temporal;
         }
-
         StackLinkedList<Naipe> mazo = new StackLinkedList<>();
         for (Naipe carta : cartas) {
             mazo.push(carta);
@@ -154,6 +132,7 @@ public class Partida {
         return mazo;
     }
 
+    
     public int getNumeroPartida() {
         return numeroPartida;
     }
@@ -166,6 +145,7 @@ public class Partida {
     	return ganadores;
     }
 
+    
     private StackLinkedList<Naipe> validarMazo(StackLinkedList<Naipe> mazo) {
         Objects.requireNonNull(mazo, "El mazo no puede ser null");
         if (mazo.size() < CANTIDAD_JUGADORES * Ronda.CARTAS_POR_RONDA * CANTIDAD_RONDAS) {
@@ -173,6 +153,7 @@ public class Partida {
         }
         return mazo;
     }
+ 
     
     private Jugador[] validarJugadores(Jugador[] participantes) {
         Objects.requireNonNull(participantes, "Los jugadores no pueden ser null");
