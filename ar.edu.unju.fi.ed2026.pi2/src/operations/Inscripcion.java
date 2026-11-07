@@ -56,7 +56,7 @@ public class Inscripcion {
         // Jugador asigna el ID único y comienza con puntaje cero.
         Jugador nuevoJugador = new Jugador(nombre, apellido, dni, edad);
 
-        // 3. Guardar en la estructura de disponibles
+        // Guardar en la estructura de disponibles
         jugadoresDisponibles.addLast(nuevoJugador);
 
         System.out.println("¡Jugador inscripto con éxito! Se le asignó el Número de Jugador: "

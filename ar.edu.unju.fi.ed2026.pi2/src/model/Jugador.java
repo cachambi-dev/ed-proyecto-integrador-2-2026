@@ -33,21 +33,6 @@ public class Jugador {
         this.manoActual = new Queue<>(Ronda.CARTAS_POR_RONDA);
         this.naipesGanados = new QueueLinkedList<>();
     }
-    
-    /**
-     * Crea un jugador sin datos de inscripción adicionales.
-     *
-     * @param nombre nombre del jugador
-     * @param apellido apellido del jugador
-     */
-    public Jugador(String nombre, String apellido) {
-        this.id = siguienteId++;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.puntaje = 0;
-        this.manoActual = new Queue<>(Ronda.CARTAS_POR_RONDA);
-        this.naipesGanados = new QueueLinkedList<>();
-    }
 
     /**
      * Obtiene el identificador único del jugador.
@@ -123,24 +108,6 @@ public class Jugador {
     }
 
     /**
-     * Modifica el nombre del jugador.
-     *
-     * @param nombre nuevo nombre del jugador
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Modifica el apellido del jugador.
-     *
-     * @param apellido nuevo apellido del jugador
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    /**
      * Modifica el puntaje del jugador.
      *
      * @param puntaje nuevo puntaje del jugador
@@ -187,26 +154,6 @@ public class Jugador {
      */
     public void guardarNaipeGanados(Naipe naipe) {
         naipesGanados.add(naipe);
-    }
-
-    /**
-     * Vacia la cola de cartas ganadas del jugador, eliminando todas las cartas
-     * almacenadas.
-     */
-    public void vaciarNaipesGanados() {
-        while (!naipesGanados.isEmpty()) {
-            naipesGanados.remove();
-        }
-    }
-
-    /**
-     * Vacia la cola que representa la mano actual del jugador, eliminando todas las
-     * cartas almacenadas.
-     */
-    public void vaciarManoActual() {
-        while (!manoActual.isEmpty()) {
-            manoActual.remove();
-        }
     }
 
     /**

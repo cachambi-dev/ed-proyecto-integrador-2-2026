@@ -2,8 +2,8 @@ package model;
 
 /** Representa una carta con palo, valor y estado de disponibilidad. */
 public class Naipe {
-    private String palo;
-    private int valor;
+    private final String palo;
+    private final int valor;
     private boolean isDisponible;
 
     /**
@@ -42,7 +42,7 @@ public class Naipe {
      * @return {@code true} si la carta está disponible; en caso contrario,
      *         {@code false}
      */
-    public boolean getIsDisponible() {
+    public boolean isDisponible() {
         return isDisponible;
     }
 
@@ -53,24 +53,6 @@ public class Naipe {
      */
     public void setDisponible(boolean isDisponible) {
         this.isDisponible = isDisponible;
-    }
-
-    /**
-     * Modifica el palo de la carta.
-     *
-     * @param palo nuevo palo de la carta
-     */
-    public void setPalo(String palo) {
-        this.palo = palo;
-    }
-
-    /**
-     * Modifica el valor de la carta.
-     *
-     * @param valor nuevo valor de la carta
-     */
-    public void setValor(int valor) {
-        this.valor = valor;
     }
 
     /**

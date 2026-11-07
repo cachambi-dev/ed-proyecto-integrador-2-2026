@@ -46,10 +46,6 @@ public class Ranking {
             ranking.add(entrada);
             return;
         }
-
-        // Mantiene los datos más recientes del jugador asociado a ese id.
-        entrada.setJugador(jugador);
-
         if (puntajeDeJugador <= entrada.getPuntaje()) {
             return;
         }
@@ -75,7 +71,7 @@ public class Ranking {
 
     /** Muestra por consola los jugadores ordenados de mayor a menor puntaje. */
     public void mostrarRanking() {
-        if (entradas.size() == 0) {
+        if (cantidadJugadores() == 0) {
             System.out.println("El ranking todavía no tiene jugadores.");
             return;
         }
@@ -104,7 +100,7 @@ public class Ranking {
     }
     // Una ficha interna que nos permite mantener el puntaje de cada jugador y el orden en que se incorporó al ranking.
     private static final class EntradaRanking implements Comparable<EntradaRanking> {
-        private Jugador jugador;
+        private final Jugador jugador;
         private final long orden;
         private int puntaje;
 
@@ -116,10 +112,6 @@ public class Ranking {
 
         private Jugador getJugador() {
             return jugador;
-        }
-
-        private void setJugador(Jugador jugador) {
-            this.jugador = jugador;
         }
 
         private int getPuntaje() {

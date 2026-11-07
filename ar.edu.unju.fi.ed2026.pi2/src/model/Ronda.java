@@ -48,30 +48,12 @@ public class Ronda {
     }
 
     /**
-     * Modifica el número de partida asociado.
-     *
-     * @param numero nuevo número de partida
-     */
-    public void setNumero(int numero) {
-        this.numeroPartida = numero;
-    }
-
-    /**
      * Devuelve el número de la ronda.
      *
      * @return número de ronda
      */
     public int getNumeroRonda() {
         return numeroRonda;
-    }
-
-    /**
-     * Modifica el número de la ronda.
-     *
-     * @param numeroRonda nuevo número de ronda
-     */
-    public void setNumeroRonda(int numeroRonda) {
-        this.numeroRonda = numeroRonda;
     }
 
     /**
@@ -84,33 +66,12 @@ public class Ronda {
     }
 
     /**
-     * Reemplaza los participantes y reinicia sus puntajes de ronda.
-     *
-     * @param participantes nuevos participantes
-     * @throws NullPointerException si {@code participantes} es {@code null}
-     */
-    public void setParticipantes(Jugador[] participantes) {
-        this.participantes = Objects.requireNonNull(participantes, "Los participantes no pueden ser null");
-        this.puntajes = new int[participantes.length];
-    }
-
-    /**
      * Devuelve la lista de ganadores de la ronda.
      *
      * @return lista de ganadores
      */
     public SimpleLinkedList<Jugador> getGanadores() {
         return ganadores;
-    }
-
-    /**
-     * Reemplaza la lista de ganadores de la ronda.
-     *
-     * @param ganadores nueva lista de ganadores
-     * @throws NullPointerException si {@code ganadores} es {@code null}
-     */
-    public void setGanadores(SimpleLinkedList<Jugador> ganadores) {
-        this.ganadores = Objects.requireNonNull(ganadores, "La lista de ganadores no puede ser null");
     }
 
     /**
@@ -128,7 +89,7 @@ public class Ronda {
      * @param n carta que se desea evaluar
      * @return {@code true} si la carta es un as
      */
-    public boolean esAs(Naipe n) {
+    private boolean esAs(Naipe n) {
         return n != null && n.getValor() == 1;
     }
 
@@ -138,7 +99,7 @@ public class Ronda {
      * @param n carta que se desea evaluar
      * @return {@code true} si la carta es un comodín
      */
-    public boolean esComodin(Naipe n) {
+    private boolean esComodin(Naipe n) {
         return n != null && "Comodin".equalsIgnoreCase(n.getPalo());
     }
 
@@ -148,7 +109,7 @@ public class Ronda {
      * @param j jugador que se desea evaluar
      * @return {@code true} si la mano contiene un as
      */
-    public boolean tieneAs(Jugador j) {
+    private boolean tieneAs(Jugador j) {
         for (Naipe n : j.getManoActual()) {
             if (esAs(n)) {
                 return true;
@@ -163,7 +124,7 @@ public class Ronda {
      * @param j jugador que se desea evaluar
      * @return {@code true} si la mano contiene un comodín
      */
-    public boolean tieneComodin(Jugador j) {
+    private boolean tieneComodin(Jugador j) {
         for (Naipe n : j.getManoActual()) {
             if (esComodin(n)) {
                 return true;
@@ -178,7 +139,7 @@ public class Ronda {
      * @param j jugador cuyo puntaje se calcula
      * @return puntaje calculado
      */
-    public int calcularPuntajeAs(Jugador j) {
+    private int calcularPuntajeAs(Jugador j) {
         int puntaje = 0;
         for (Naipe n : j.getManoActual()) {
             if (n != null) {
