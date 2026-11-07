@@ -23,26 +23,6 @@ public class Juego {
         this.ranking = Objects.requireNonNull(ranking, "El ranking no puede ser null");
         this.random = new Random();
     }
-
-//    public Partida iniciarPartida(Jugador[] seleccionados) {
-//        if (partidaEnCurso) {
-//            throw new IllegalStateException("Ya hay una partida en curso.");
-//        }
-//
-//        Jugador[] participantes = validarSeleccion(seleccionados);
-//        StackLinkedList<Naipe> mazo = crearMazoBarajado();
-//        Partida partida = new Partida(++numeroPartida, mazo, participantes);
-//
-//        partidaEnCurso = true;
-//        try {
-//            partida.partidaNueva();
-//            actualizarRanking(participantes);
-//        } finally {
-//            partidaEnCurso = false;
-//        }
-//
-//        return partida;
-//    }
     
     public Partida iniciarPartida(Jugador[] seleccionados) {
         if (partidaEnCurso) {
