@@ -1,17 +1,35 @@
 package structures;
 
+/** Define las operaciones básicas de una lista enlazada. */
 public interface ILinkedList<ELEMENT> extends Iterable<ELEMENT>  {
     
-    // Returns the number of elements in this list.
+    /**
+     * Devuelve la cantidad de elementos de la lista.
+     *
+     * @return cantidad de elementos
+     */
     public int size();
     
-    // Inserts the specified element at the beginning of this list.
+    /**
+     * Inserta un elemento al comienzo de la lista.
+     *
+     * @param item elemento que se insertará
+     */
     public void addFirst(ELEMENT item);
 
-    //  Appends the specified element to the end of this list.
+    /**
+     * Agrega un elemento al final de la lista.
+     *
+     * @param item elemento que se agregará
+     */
     public void addLast(ELEMENT item);
 
-    // Removes and returns the first element from this list.
+    /**
+     * Elimina y devuelve el primer elemento de la lista.
+     *
+     * @return elemento eliminado
+     * @throws RuntimeException si la lista está vacía
+     */
     public ELEMENT removeFirst();
     
 

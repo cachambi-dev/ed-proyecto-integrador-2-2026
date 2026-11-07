@@ -33,3 +33,15 @@ replay_pid*
 
 # Mise
 mise.toml
+
+# Archivos de IDE
+.settings/
+.classpath
+.project
+.vscode/
+.idea/
+*.iml
+
+# Salida de compilación
+target/
+bin/

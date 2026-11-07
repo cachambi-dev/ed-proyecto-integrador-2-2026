@@ -4,6 +4,7 @@ package structures;
 // Created by Julio Tentor <jtentor@fi.unju.edu.ar>
 //
 
+/** Implementa un árbol binario y operaciones de recorrido y conteo. */
 public class BinaryTree<ELEMENT> {
 
     //region Binary Tree Node Class
@@ -48,15 +49,27 @@ public class BinaryTree<ELEMENT> {
 
     //region Constructors
 
+    /** Crea un árbol vacío. */
     public BinaryTree() {
         this.root = null;
     }
 
-    // Métodos para propósitos académicos
+    /**
+     * Crea un árbol con un único elemento como raíz.
+     *
+     * @param item elemento de la raíz
+     */
     public BinaryTree(ELEMENT item) {
         this(item, null, null);
     }
 
+    /**
+     * Crea un árbol con raíz y subárboles izquierdo y derecho opcionales.
+     *
+     * @param item elemento de la raíz
+     * @param left subárbol izquierdo, o {@code null}
+     * @param right subárbol derecho, o {@code null}
+     */
     public BinaryTree(ELEMENT item, BinaryTree<ELEMENT> left, BinaryTree<ELEMENT> right) {
         this.root = new BTNode<ELEMENT>(item, null, null);
         if (left != null) {
@@ -69,6 +82,11 @@ public class BinaryTree<ELEMENT> {
 
     //endregion
 
+    /**
+     * Devuelve una representación del árbol usando paréntesis para sus hijos.
+     *
+     * @return representación textual del árbol
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -97,6 +115,7 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    /** Recorre el árbol en orden raíz, izquierdo y derecho e imprime sus elementos. */
     public void PreOrder() {
         PreOrder(this.root);
     }
@@ -109,6 +128,7 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    /** Recorre el árbol en orden izquierdo, raíz y derecho e imprime sus elementos. */
     public void InOrder() {
         InOrder(this.root);
     }
@@ -121,6 +141,7 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    /** Recorre el árbol en orden izquierdo, derecho y raíz e imprime sus elementos. */
     public void PostOrder() {
         PostOrder(this.root);
     }
@@ -133,6 +154,7 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    /** Recorre el árbol en orden derecho, raíz e izquierdo e imprime sus elementos. */
     public void DescendingOrder() {
         DescendingOrder(this.root);
     }
@@ -145,6 +167,11 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    /**
+     * Devuelve la cantidad total de nodos del árbol.
+     *
+     * @return cantidad de nodos
+     */
     public int NodeCount() {
         return NodeCount(this.root);
     }
@@ -156,6 +183,11 @@ public class BinaryTree<ELEMENT> {
         return 0;
     }
 
+    /**
+     * Devuelve la cantidad de hojas del árbol.
+     *
+     * @return cantidad de hojas
+     */
     public int LeafCount() {
         return LeafCount(this.root);
     }
@@ -171,6 +203,11 @@ public class BinaryTree<ELEMENT> {
         return 0;
     }
 
+    /**
+     * Devuelve la cantidad de nodos internos del árbol.
+     *
+     * @return cantidad de nodos internos
+     */
     public int InternalCount() {
         return InternalCount(this.root);
     }
@@ -186,6 +223,11 @@ public class BinaryTree<ELEMENT> {
         return 0;
     }
 
+    /**
+     * Devuelve el nivel máximo, considerando la raíz como nivel cero.
+     *
+     * @return nivel máximo, o {@code -1} si el árbol está vacío
+     */
     public int MaxLevel() {
         return MaxLevel(this.root);
     }
@@ -202,6 +244,11 @@ public class BinaryTree<ELEMENT> {
         return -1;
     }
 
+    /**
+     * Devuelve la altura del árbol en cantidad de niveles.
+     *
+     * @return altura del árbol
+     */
     public int Height() {
         return MaxLevel() + 1;
     }

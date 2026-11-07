@@ -2,6 +2,7 @@ package Helper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -79,6 +80,17 @@ public class Helper {
 
     public static Integer nextInteger(Scanner scanner, String mensaje){
         return nextInteger(scanner, mensaje, 0);
+    }
+
+    public static String leerCadena(Scanner scanner, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            String palabra = scanner.nextLine();
+            if (!palabra.trim().isEmpty()) {
+                return palabra;
+            }
+            System.out.println("Error: No puedes ingresar una cadena vacía.");
+        }
     }
 
     /**
@@ -191,6 +203,36 @@ public class Helper {
 
     public static Date nextDate(String mensaje) {
         return nextDate(Helper.scanner, mensaje);
+    }
+
+
+    // Método para validar enteros positivos
+    public static int leerEnteroPositivo(Scanner scanner, String mensaje)
+    {
+        int numero = 0;
+        boolean entradaValida = false;
+        
+        while ( !entradaValida )
+        {
+            System.out.print(mensaje);
+            try
+            {
+                numero = scanner.nextInt(); 
+                
+                if (numero > 0) {
+                    entradaValida = true;
+                } else {
+                    System.out.println("Error: El número debe ser mayor a cero.");
+                }
+                
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("Error: Debe ingresar un valor numérico.");
+                scanner.nextLine();
+            }
+        }
+        return numero;
     }
 
 }
