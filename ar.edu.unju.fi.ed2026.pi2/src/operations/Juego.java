@@ -7,6 +7,7 @@ import model.Jugador;
 import model.Partida;
 import structures.SimpleLinkedList;
 
+/** Coordina el inicio de partidas y la actualización del ranking. */
 public class Juego {
 
     private static final int CANTIDAD_JUGADORES = 4;
@@ -17,6 +18,13 @@ public class Juego {
     private static int numeroPartida; //static because the variable must be unitary, should >1 Games be instanced
     private boolean partidaEnCurso;
 
+    /**
+     * Crea un juego con la lista de inscriptos y el ranking que administrará.
+     *
+     * @param jugadoresDisponibles jugadores que pueden participar
+     * @param ranking ranking que acumula el mejor puntaje de cada jugador
+     * @throws NullPointerException si alguno de los argumentos es {@code null}
+     */
     public Juego(SimpleLinkedList<Jugador> jugadoresDisponibles, Ranking ranking) {
         this.jugadoresDisponibles = Objects.requireNonNull(jugadoresDisponibles,
                 "La lista de jugadores no puede ser null");
@@ -24,6 +32,16 @@ public class Juego {
         this.random = new Random();
     }
     
+    /**
+     * Inicia una partida con los cuatro jugadores seleccionados.
+     *
+     * @param seleccionados jugadores que participarán en la partida
+     * @return partida ejecutada
+     * @throws NullPointerException si la selección o uno de sus jugadores es {@code null}
+     * @throws IllegalArgumentException si la selección no contiene cuatro jugadores
+     *         inscriptos y distintos
+     * @throws IllegalStateException si ya hay una partida en curso
+     */
     public Partida iniciarPartida(Jugador[] seleccionados) {
         if (partidaEnCurso) {
             throw new IllegalStateException("Ya hay una partida en curso.");
@@ -43,6 +61,13 @@ public class Juego {
         return partida;
     }
 
+    /**
+     * Selecciona cuatro jugadores inscriptos al azar e inicia una partida.
+     *
+     * @return partida ejecutada
+     * @throws IllegalStateException si hay menos de cuatro jugadores disponibles
+     *         o ya existe una partida en curso
+     */
     public Partida iniciarPartidaAleatoria() {
         return iniciarPartida(seleccionarAleatoriamente());
     }

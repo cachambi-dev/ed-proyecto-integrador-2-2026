@@ -75,6 +75,7 @@ package structures;
 // import java.lang.reflect.Array;
 import java.util.Iterator;
 
+/** Implementa una cola circular de capacidad fija. */
 public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Constants
@@ -94,12 +95,16 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Constructors
 
-    // Default constructor
+    /** Crea una cola con la capacidad predeterminada. */
     public Queue() {
         this(Queue.DEFAULT_DIMENSION);
     }
 
-    // Creates a queue with the specified dimension.
+    /**
+     * Crea una cola con la capacidad indicada.
+     *
+     * @param dimension capacidad máxima de la cola
+     */
     public Queue(int dimension) {
         this.data = new Object[dimension];
         this.head = 0;
@@ -120,7 +125,13 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Queue Methods
 
-    // Operacion EnQueue en la teoría de Estructura de Datos
+    /**
+     * Agrega un elemento o lanza una excepción si la cola está llena.
+     *
+     * @param element elemento que se agregará
+     * @return {@code true} cuando el elemento se agrega correctamente
+     * @throws IllegalStateException si la cola está llena
+     */
     //
     // Inserts the specified element into this queue if it is possible to do so
     // immediately without violating capacity restrictions, returning true upon
@@ -139,7 +150,12 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
         return true;
     }
 
-    // Operacion peek en la teoría de Estructura de Datos
+    /**
+     * Devuelve el primer elemento sin quitarlo.
+     *
+     * @return primer elemento
+     * @throws IllegalStateException si la cola está vacía
+     */
     //
     // Retrieves, but does not remove, the head of this queue. This method differs
     // from peek only in that it throws an exception if this queue is empty.
@@ -153,7 +169,12 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
         return (ELEMENT) this.data[this.head];
     }
 
-    // Operacion EnQueue en la teoría de Estructura de Datos
+    /**
+     * Intenta agregar un elemento y devuelve si la operación tuvo éxito.
+     *
+     * @param element elemento que se agregará
+     * @return {@code true} si se agregó; {@code false} si no hay capacidad
+     */
     //
     // Inserts the specified element into this queue if it is possible to do so
     // immediately without violating capacity restrictions. When using a
@@ -172,8 +193,11 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
         return true;
     }
 
-    // Retrieves, but does not remove, the head of this queue, or returns null if
-    // this queue is empty.
+    /**
+     * Devuelve el primer elemento sin quitarlo.
+     *
+     * @return primer elemento, o {@code null} si está vacía
+     */
     @SuppressWarnings("unchecked")
     public ELEMENT peek() {
         if (this.size() <= 0) {
@@ -182,7 +206,11 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
         return (ELEMENT) this.data[this.head];
     }
 
-    // Operacion DeQueue en la teoría de Estructura de Datos
+    /**
+     * Quita y devuelve el primer elemento.
+     *
+     * @return elemento retirado, o {@code null} si está vacía
+     */
     //
     // Retrieves and removes the head of this queue, or returns null if this queue
     // is empty.
@@ -199,7 +227,12 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
         return result;
     }
 
-    // Operacion DeQueue en la teoría de Estructura de Datos
+    /**
+     * Quita y devuelve el primer elemento.
+     *
+     * @return elemento retirado
+     * @throws IllegalStateException si la cola está vacía
+     */
     //
     // Retrieves and removes the head of this queue. This method differs from poll()
     // only in that it throws an exception if this queue is empty.
@@ -219,6 +252,11 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Override Object basic methods
 
+    /**
+     * Devuelve la cola en formato textual.
+     *
+     * @return representación textual de la cola
+     */
     @Override
     public String toString() {
 
@@ -241,15 +279,30 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Collection Methods
 
+    /**
+     * Indica si la cola no contiene elementos.
+     *
+     * @return {@code true} si está vacía
+     */
     public boolean isEmpty() {
         return this.count <= 0;
     }
 
+    /**
+     * Devuelve la cantidad de elementos actuales.
+     *
+     * @return cantidad de elementos
+     */
     public int size() {
         return this.count;
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * Copia los elementos actuales en un arreglo.
+     *
+     * @return arreglo con los elementos desde la cabeza de la cola
+     */
     public ELEMENT[] toArray() {
         ELEMENT[] result = (ELEMENT[]) new Object[this.size()];
         for (int i = 0, pos = this.head, cta = this.size(); cta > 0; ++i, pos = this.next(pos), --cta) {
@@ -261,11 +314,24 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Caso Ejemplo b) Methods
 
+    /**
+     * Crea una cola con los elementos de esta cola seguidos por los de otra.
+     *
+     * @param queue2 segunda cola
+     * @return cola resultante
+     */
     public Queue<ELEMENT> union(Queue<ELEMENT> queue2) {
         return union(queue2, 0);
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * Une dos colas y reserva capacidad adicional en la cola resultante.
+     *
+     * @param queue2 segunda cola
+     * @param moreElements capacidad adicional
+     * @return cola resultante
+     */
     public Queue<ELEMENT> union(Queue<ELEMENT> queue2, int moreElements) {
         Queue<ELEMENT> queue1 = this;
 
@@ -284,11 +350,24 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Ejercicio 3 Methods
 
+    /**
+     * Crea una cola intercalando los elementos de ambas colas.
+     *
+     * @param queue2 segunda cola
+     * @return cola resultante
+     */
     public Queue<ELEMENT> fusion(Queue<ELEMENT> queue2) {
         return fusion(queue2, 0);
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * Intercala dos colas y reserva capacidad adicional en la cola resultante.
+     *
+     * @param queue2 segunda cola
+     * @param moreElements capacidad adicional
+     * @return cola resultante
+     */
     public Queue<ELEMENT> fusion(Queue<ELEMENT> queue2, int moreElements) {
         Queue<ELEMENT> queue1 = this;
 
@@ -320,6 +399,11 @@ public class Queue<ELEMENT> implements Iterable<ELEMENT> {
 
     //region Iterable Methods
 
+    /**
+     * Devuelve un iterador sobre los elementos desde la cabeza de la cola.
+     *
+     * @return iterador de la cola
+     */
     @Override
     public Iterator<ELEMENT> iterator() {
         return new QueueIterator(this);

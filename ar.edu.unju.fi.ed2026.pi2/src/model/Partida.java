@@ -7,6 +7,7 @@ import structures.QueueLinkedList;
 import structures.StackLinkedList;
 import structures.SimpleLinkedList;
 
+/** Coordina una partida completa, sus rondas, puntajes y ganadores. */
 public class Partida {
 	
 	//constants
@@ -22,6 +23,15 @@ public class Partida {
     private boolean jugada;
     
     //methods
+    /**
+     * Crea una partida usando un mazo proporcionado por el llamador.
+     *
+     * @param numeroPartida identificador positivo de la partida
+     * @param mazo mazo con cartas suficientes para las rondas
+     * @param jugadores exactamente cuatro jugadores distintos
+     * @throws NullPointerException si el mazo o los jugadores son {@code null}
+     * @throws IllegalArgumentException si el número, el mazo o los jugadores no son válidos
+     */
     public Partida(int numeroPartida, StackLinkedList<Naipe> mazo, Jugador[] jugadores) {
         if (numeroPartida < 1) {
             throw new IllegalArgumentException("El número de partida debe ser positivo.");
@@ -32,6 +42,14 @@ public class Partida {
     }
     
     
+    /**
+     * Crea una partida con un mazo completo mezclado aleatoriamente.
+     *
+     * @param numeroPartida identificador positivo de la partida
+     * @param jugadores exactamente cuatro jugadores distintos
+     * @throws NullPointerException si {@code jugadores} es {@code null}
+     * @throws IllegalArgumentException si el número o los jugadores no son válidos
+     */
     public Partida(int numeroPartida, Jugador[] jugadores) {
         if (numeroPartida < 1) {
             throw new IllegalArgumentException("El número de partida debe ser positivo.");
@@ -42,6 +60,11 @@ public class Partida {
     }
     
     
+    /**
+     * Ejecuta las rondas, calcula los puntajes y determina los ganadores.
+     *
+     * @throws IllegalStateException si la partida ya fue ejecutada
+     */
     public void jugar() {
     	if (jugada) {
     		throw new IllegalStateException("La partida ya fue jugada.");
@@ -133,14 +156,29 @@ public class Partida {
     }
 
     
+    /**
+     * Devuelve el número identificador de la partida.
+     *
+     * @return identificador de la partida
+     */
     public int getNumeroPartida() {
         return numeroPartida;
     }
 
+    /**
+     * Devuelve una copia del arreglo de jugadores de la partida.
+     *
+     * @return copia del arreglo de jugadores
+     */
     public Jugador[] getJugadores() {
         return jugadores.clone();
     }
     
+    /**
+     * Devuelve la lista de jugadores ganadores, posiblemente con empate.
+     *
+     * @return lista de ganadores
+     */
     public SimpleLinkedList<Jugador> getGanadores() {
     	return ganadores;
     }
