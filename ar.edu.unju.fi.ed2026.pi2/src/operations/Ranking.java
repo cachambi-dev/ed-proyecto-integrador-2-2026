@@ -17,6 +17,7 @@ public class Ranking {
     private final SimpleLinkedList<EntradaRanking> entradas;
     private long siguienteOrden;
 
+    /** Crea un ranking vacío. */
     public Ranking() {
         this.ranking = new BinarySearchTree<>();
         this.entradas = new SimpleLinkedList<>();
@@ -24,9 +25,13 @@ public class Ranking {
     }
 
     /**
-     * Incorpora al jugador al ranking o actualiza su mejor puntaje.
-     * Los resultados menores que el mejor puntaje ya registrado se ignoran.
-     * Si se recibe otro objeto con el mismo id, se actualiza la entrada existente.
+     * Agrega un jugador o conserva y actualiza su mejor puntaje.
+     * Los resultados menores o iguales al mejor puntaje registrado se ignoran.
+     *
+     * @param jugador jugador que se incorpora o actualiza
+     * @param puntajeDeJugador puntaje obtenido en la partida
+     * @throws NullPointerException si {@code jugador} es {@code null}
+     * @throws IllegalArgumentException si el puntaje es negativo
      */
     public void actualizar(Jugador jugador, int puntajeDeJugador) {
         Objects.requireNonNull(jugador, "El jugador no puede ser null");
@@ -55,13 +60,20 @@ public class Ranking {
         ranking.add(entrada);
     }
 
+    /**
+     * Devuelve el mejor puntaje registrado para un jugador.
+     *
+     * @param jugador jugador cuyo puntaje se desea consultar
+     * @return mejor puntaje registrado, o {@code null} si todavía no está en el ranking
+     * @throws NullPointerException si {@code jugador} es {@code null}
+     */
     public Integer consultarPuntaje(Jugador jugador) {
         Objects.requireNonNull(jugador, "El jugador no puede ser null");
         EntradaRanking entrada = buscarEntrada(jugador.getId());
         return entrada == null ? null : entrada.getPuntaje();
     }
 
-    /** Muestra los jugadores ordenados de mayor a menor puntaje. */
+    /** Muestra por consola los jugadores ordenados de mayor a menor puntaje. */
     public void mostrarRanking() {
         if (entradas.size() == 0) {
             System.out.println("El ranking todavía no tiene jugadores.");
@@ -73,7 +85,11 @@ public class Ranking {
         System.out.println();
     }
 
-    /** Devuelve la cantidad de jugadores incluidos en el ranking. */
+    /**
+     * Devuelve la cantidad de jugadores incluidos en el ranking.
+     *
+     * @return cantidad de jugadores registrados
+     */
     public int cantidadJugadores() {
         return entradas.size();
     }

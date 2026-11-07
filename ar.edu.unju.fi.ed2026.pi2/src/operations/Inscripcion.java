@@ -5,18 +5,31 @@ import structures.SimpleLinkedList;
 import Helper.Helper;
 import java.util.Scanner;
 
+/** Gestiona el registro y la búsqueda de participantes disponibles. */
 public class Inscripcion {
     private final SimpleLinkedList<Jugador> jugadoresDisponibles;
 
+    /** Crea una inscripción sin participantes registrados. */
     public Inscripcion() {
         this.jugadoresDisponibles = new SimpleLinkedList<>();
     }
 
+    /**
+     * Devuelve la lista de jugadores inscriptos disponibles.
+     *
+     * @return lista mutable de jugadores disponibles
+     */
     public SimpleLinkedList<Jugador> getJugadoresDisponibles() {
         return jugadoresDisponibles;
     }
 
-    /* Devuelve el jugador creado o null si el DNI ya estaba registrado. */
+    /**
+     * Lee los datos de un participante y lo agrega si su DNI no está registrado.
+     *
+     * @param scanner fuente de datos utilizada para solicitar la inscripción
+     * @return jugador creado, o {@code null} si el DNI ya estaba registrado
+     * @throws NullPointerException si {@code scanner} es {@code null}
+     */
     public Jugador inscribirParticipante(Scanner scanner) {
         System.out.println("\n=== INSCRIPCIÓN DE PARTICIPANTE ===");
 
@@ -51,7 +64,12 @@ public class Inscripcion {
         return nuevoJugador;
     }
 
-    /* Valida si un DNI ya existe en la lista de inscriptos*/
+    /**
+     * Busca un participante por su DNI, ignorando diferencias de mayúsculas.
+     *
+     * @param dni DNI que se desea buscar
+     * @return jugador encontrado, o {@code null} si no existe
+     */
     public Jugador buscarPorDni(String dni) {
         for (int i = 0; i < jugadoresDisponibles.size(); i++) {
             Jugador j = (Jugador) jugadoresDisponibles.get(i);
@@ -62,7 +80,12 @@ public class Inscripcion {
         return null;
     }
 
-    /* Busca un participante por su número único de jugador*/
+    /**
+     * Busca un participante por su identificador único.
+     *
+     * @param id identificador del jugador
+     * @return jugador encontrado, o {@code null} si no existe
+     */
     public Jugador buscarPorNumeroJugador(int id) {
         for (int i = 0; i < jugadoresDisponibles.size(); i++) {
             Jugador j = jugadoresDisponibles.get(i);

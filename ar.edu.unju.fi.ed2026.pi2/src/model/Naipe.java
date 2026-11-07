@@ -1,5 +1,6 @@
 package model;
 
+/** Representa una carta con palo, valor y estado de disponibilidad. */
 public class Naipe {
     private String palo;
     private int valor;
@@ -72,12 +73,12 @@ public class Naipe {
         this.valor = valor;
     }
 
-    @Override
     /**
      * Devuelve una representación textual de la carta.
      *
      * @return representación textual de la carta
      */
+    @Override
     public String toString() {
         return "Naipe [palo=" + palo + ", valor=" + valor + ", isDisponible=" + isDisponible + "]";
     }

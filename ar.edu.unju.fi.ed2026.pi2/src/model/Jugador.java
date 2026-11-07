@@ -3,6 +3,7 @@ package model;
 import structures.Queue;
 import structures.QueueLinkedList;
 
+/** Representa a un participante y las cartas que recibe o gana durante el juego. */
 public class Jugador {
     private static int siguienteId = 1;
     private final int id;
@@ -19,6 +20,8 @@ public class Jugador {
      *
      * @param nombre   nombre del jugador
      * @param apellido apellido del jugador
+    * @param dni      documento nacional de identidad del jugador
+    * @param edad     edad del jugador
      */
     public Jugador(String nombre, String apellido, String dni, int edad) {
         this.id = siguienteId++;
@@ -31,6 +34,12 @@ public class Jugador {
         this.naipesGanados = new QueueLinkedList<>();
     }
     
+    /**
+     * Crea un jugador sin datos de inscripción adicionales.
+     *
+     * @param nombre nombre del jugador
+     * @param apellido apellido del jugador
+     */
     public Jugador(String nombre, String apellido) {
         this.id = siguienteId++;
         this.nombre = nombre;

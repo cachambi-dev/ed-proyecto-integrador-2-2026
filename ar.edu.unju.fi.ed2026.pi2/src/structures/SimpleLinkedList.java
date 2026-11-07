@@ -6,6 +6,7 @@ package structures;
 
 import java.util.Iterator;
 
+/** Implementa una lista enlazada simple con acceso por posición e iteración. */
 public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
 
     //region Node Class
@@ -35,6 +36,7 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
 
     //region Constructors
 
+    /** Crea una lista vacía. */
     public SimpleLinkedList() {
         this.head = null;
         this.count = 0;
@@ -44,10 +46,21 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
 
     //region Linked List Methods
 
+    /**
+     * Devuelve la cantidad de elementos almacenados.
+     *
+     * @return cantidad de elementos
+     */
     public int size() {
         return this.count;
     }
 
+    /**
+     * Devuelve el primer elemento.
+     *
+     * @return primer elemento
+     * @throws RuntimeException si la lista está vacía
+     */
     public ELEMENT getFirst() {
         if (this.count == 0) {
             throw new RuntimeException("La lista está vacía...");
@@ -55,6 +68,13 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         return this.head.item;
     }
 
+    /**
+     * Devuelve el elemento ubicado en el índice indicado.
+     *
+     * @param index índice del elemento, comenzando en cero
+     * @return elemento ubicado en el índice
+     * @throws IndexOutOfBoundsException si el índice no es válido
+     */
     public ELEMENT get(int index) {
         if (index < 0 || index >= this.count) {
             throw new IndexOutOfBoundsException("Posicion invalida");
@@ -66,6 +86,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         return current.item;
     }
 
+    /**
+     * Inserta un elemento al comienzo mediante la implementación inicial.
+     *
+     * @param item elemento que se insertará
+     */
     public void addFirstRookieVersion(ELEMENT item) {
         if (this.count == 0) {
             this.head = this.tail = new Node<ELEMENT>(item, null);
@@ -78,6 +103,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         }
     }
 
+    /**
+     * Inserta un elemento al comienzo de la lista.
+     *
+     * @param item elemento que se insertará
+     */
     public void addFirst(ELEMENT item) {
         Node<ELEMENT> temp = new Node<ELEMENT>(item, this.head);
         if (this.count == 0) {
@@ -87,6 +117,13 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         ++this.count;
     }
 
+    /**
+     * Inserta un elemento en el índice indicado.
+     *
+     * @param index posición de inserción, entre cero y {@link #size()}
+     * @param item elemento que se insertará
+     * @throws IndexOutOfBoundsException si el índice no es válido
+     */
     public void add(int index, ELEMENT item){
         if (index < 0 || index > this.count){
             throw new IndexOutOfBoundsException("Posicion invalida");
@@ -112,6 +149,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
          this.count++;
     }
 
+    /**
+     * Agrega un elemento al final mediante la implementación inicial.
+     *
+     * @param item elemento que se agregará
+     */
     public void addLastRookieVersion(ELEMENT item) {
         if (this.count == 0) {
             this.head = this.tail = new Node<ELEMENT>(item, null);
@@ -124,6 +166,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         }
     }
 
+    /**
+     * Agrega un elemento al final de la lista.
+     *
+     * @param item elemento que se agregará
+     */
     public void addLast(ELEMENT item) {
         Node<ELEMENT> temp = new Node<ELEMENT>(item, null);
         if (this.count == 0) {
@@ -135,6 +182,12 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         ++this.count;
     }
 
+    /**
+     * Elimina y devuelve el primer elemento.
+     *
+     * @return elemento eliminado
+     * @throws RuntimeException si la lista está vacía
+     */
     public ELEMENT removeFirst() {
         if (this.count == 0) {
             throw new RuntimeException("La lista está vacía...");
@@ -148,6 +201,12 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         return item;
     }
 
+    /**
+     * Elimina y devuelve el último elemento.
+     *
+     * @return elemento eliminado
+     * @throws RuntimeException si la lista está vacía
+     */
     public ELEMENT removeLast() {
         if (this.count == 0) {
             throw new RuntimeException("La lista está vacía...");
@@ -167,6 +226,13 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
         return item;
     }
 
+    /**
+     * Elimina y devuelve el elemento ubicado en el índice indicado.
+     *
+     * @param index índice del elemento, comenzando en cero
+     * @return elemento eliminado
+     * @throws IndexOutOfBoundsException si el índice no es válido
+     */
     public ELEMENT remove(int index){
         if (index < 0 || index >= this.count){
             throw new IndexOutOfBoundsException("Posicion Invalida");
@@ -191,6 +257,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
 
     }
 
+    /**
+     * Elimina los elementos pares; requiere que los elementos sean enteros.
+     *
+     * @throws ClassCastException si algún elemento no es un {@link Integer}
+     */
     public void eliminarPares() {
         while (this.head != null && ((Integer) this.head.item) % 2 == 0) {
             removeFirst();
@@ -213,6 +284,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
 
     //region Object Methods
 
+    /**
+     * Devuelve los elementos de la lista en formato textual.
+     *
+     * @return representación textual de la lista
+     */
     @Override
     public String toString() {
 
@@ -236,6 +312,11 @@ public class SimpleLinkedList<ELEMENT> implements ILinkedList<ELEMENT> {
     //endregion
 
     //region Iterable Methods
+    /**
+     * Devuelve un iterador que recorre la lista desde el primer elemento.
+     *
+     * @return iterador de la lista
+     */
     @Override
     public Iterator<ELEMENT> iterator() {
         return new SimpleLinkedListIterator(this.head);

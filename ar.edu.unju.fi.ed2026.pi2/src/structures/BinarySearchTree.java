@@ -4,12 +4,20 @@ package structures;
 // Created by Julio Tentor <jtentor@fi.unju.edu.ar>
 //
 
+/** Implementa un árbol binario de búsqueda ordenado por comparación natural. */
 public class BinarySearchTree<ELEMENT extends Comparable<ELEMENT>> extends BinaryTree<ELEMENT> {
 
+    /** Crea un árbol binario de búsqueda vacío. */
     public BinarySearchTree() {
         super();
     }
 
+    /**
+     * Inserta un elemento manteniendo el orden del árbol.
+     * Los elementos equivalentes se colocan en el subárbol derecho.
+     *
+     * @param item elemento que se insertará
+     */
     public void add(ELEMENT item) {
         if (this.root == null) {
             this.root = new BTNode<ELEMENT>(item, null, null);
@@ -33,6 +41,12 @@ public class BinarySearchTree<ELEMENT extends Comparable<ELEMENT>> extends Binar
         }
     }
 
+    /**
+     * Busca y devuelve un elemento equivalente.
+     *
+     * @param item elemento utilizado como clave de búsqueda
+     * @return elemento encontrado, o {@code null} si no existe
+     */
     public ELEMENT buscar(ELEMENT item) {
         BTNode<ELEMENT> current = this.root;
         while (current != null) {
@@ -45,6 +59,13 @@ public class BinarySearchTree<ELEMENT extends Comparable<ELEMENT>> extends Binar
         return null;
     }
 
+    /**
+     * Reemplaza el elemento equivalente y devuelve si fue encontrado.
+     *
+     * @param item elemento utilizado como clave de búsqueda
+     * @param nuevo elemento que reemplazará al encontrado
+     * @return {@code true} si se modificó un elemento; {@code false} si no se encontró
+     */
     public boolean modificar(ELEMENT item, ELEMENT nuevo) {
         BTNode<ELEMENT> current = this.root;
         while (current != null) {
@@ -58,6 +79,13 @@ public class BinarySearchTree<ELEMENT extends Comparable<ELEMENT>> extends Binar
         return false;
     }
 
+    /**
+     * Elimina y devuelve un elemento equivalente del árbol.
+     *
+     * @param item elemento utilizado como clave de búsqueda
+     * @return elemento eliminado
+     * @throws RuntimeException si el elemento no existe o el árbol está vacío
+     */
     public ELEMENT remove(ELEMENT item) {
         return removeByCopy(item);
         //return removeByFusion(item);
@@ -114,7 +142,11 @@ public class BinarySearchTree<ELEMENT extends Comparable<ELEMENT>> extends Binar
         return save;
     }
 
-    // Devolver nodos derechos
+    /**
+     * Devuelve los elementos del camino formado por los hijos derechos.
+     *
+     * @return lista con la raíz y sus descendientes derechos
+     */
     public SimpleLinkedList<ELEMENT> getRightNodes() {
         SimpleLinkedList<ELEMENT> rightNodes = new SimpleLinkedList<>();
         BTNode<ELEMENT> current = this.root;
